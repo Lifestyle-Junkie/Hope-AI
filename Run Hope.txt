@@ -1,3 +1,0 @@
-cd "C:\Users\nick8\OneDrive\Desktop\New folder\Hope"
-
-python ai_assistant.py
