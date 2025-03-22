@@ -1,0 +1,34 @@
+{
+    "conversation": [
+        "Hope is your AI assistant, built to respond quickly and efficiently.",
+        "You: My name is How are you hope",
+        "You: My name is tyler",
+        "You: My name is tyler",
+        "You: My name is tyler",
+        "You: My name is adrian",
+        "You: ",
+        "Hope: I'm here to chat! What else would you like me to remember?",
+        "You: who was the first president",
+        "Hope: I'm here to chat! What else would you like me to remember?",
+        "You: my name is nick",
+        "Hope: Got it! I'll remember that your name is nick.",
+        "You: what's my name",
+        "Hope: Your name is nick.",
+        "You: my favorite food is pizza",
+        "Hope: Got it! I'll remember that your favorite food is pizza.",
+        "You: what's my favorite food",
+        "Hope: I'm here to chat! What else would you like me to remember?"
+    ],
+    "user_name": "nick",
+    "knowledge": {
+        "name": "nick",
+        "favorite color": "blue",
+        "favorite show": "lucifer",
+        "favoirte food": "pizza",
+        "favorite food": "pizza"
+    },
+    "name": "tyler",
+    "favorite color": "blue",
+    "favorite show": "re zero",
+    "favorite food": "waffles"
+}
