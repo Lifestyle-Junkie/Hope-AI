@@ -1,2 +1,0 @@
-# Hope-AI
-Hope AI
