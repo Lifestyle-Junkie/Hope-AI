@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hope AI — Infinite Knowledge. Always Evolving.</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Particle.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #000;
+      color: #fff;
+      min-height: 100vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .branding {
+      position: fixed;
+      top: 1.5rem;
+      left: 2rem;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #ec4899;
+      z-index: 10;
+    }
+
+    .chat-container {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+      padding-top: 180px;
+      padding-bottom: 100px;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .chat-box {
+      background-color: #1f2937;
+      border-radius: 1rem;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 15px #ec4899;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .chat-box input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: white;
+      outline: none;
+      padding: 0.5rem;
+    }
+
+    .chat-box button {
+      background-color: #ec4899;
+      color: white;
+      font-weight: bold;
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .chat-box button:hover {
+      background-color: #db2777;
+    }
+
+    .response-text {
+      color: white;
+      margin-top: 1rem;
+      padding: 0 1rem;
+      max-width: 600px;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Particle Background -->
+  <div id="particles-js"></div>
+
+  <!-- Top-Left Branding -->
+  <div class="branding">Hope AI</div>
+
+  <!-- Centered Chat UI -->
+  <div class="chat-container">
+    <p class="text-white text-xl mb-4">Infinite Knowledge. Always Evolving.</p>
+
+    <div class="chat-box">
+      <input type="text" id="userInput" placeholder="Ask Hope anything..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <div id="response" class="response-text"></div>
+  </div>
+
+  <!-- Particle.js Config -->
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 100, density: { enable: true, value_area: 800 }},
+        color: { value: "#ffffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5 },
+        size: { value: 3 },
+        line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.2, width: 1 },
+        move: { enable: true, speed: 1, out_mode: "bounce" }
+      },
+      interactivity: {
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" }
+        },
+        modes: {
+          repulse: { distance: 100, duration: 0.4 }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
+
+  <!-- Chat POST Request (Connected to Render Backend) -->
+  <script>
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const message = input.value.trim();
+      const responseDiv = document.getElementById("response");
+
+      if (!message) return;
+
+      responseDiv.innerHTML = "Thinking...";
+
+      fetch("https://hope-ai-xs6p.onrender.com/ask", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message })
+      })
+      .then(res => res.json())
+      .then(data => {
+        responseDiv.innerHTML = `<strong>Hope:</strong> ${data.reply}`;
+        input.value = "";
+      })
+      .catch(err => {
+        responseDiv.innerHTML = "⚠️ Error communicating with Hope.";
+        console.error(err);
+      });
+    }
+  </script>
+
+</body>
+</html>
